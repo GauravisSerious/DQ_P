@@ -1,30 +1,44 @@
 .gauge-wrap {
   position: relative;
-  width: 146px;
-  height: 146px;
+  width: 180px;
+  height: 180px;
 }
 .gauge {
   transform: rotate(-90deg);
-  width: 146px;
-  height: 146px;
-  filter: drop-shadow(0 8px 18px rgba(59, 91, 219, 0.2));
+  width: 180px;
+  height: 180px;
+  filter: drop-shadow(0 8px 20px rgba(59, 91, 219, 0.18));
 }
 .gauge-bg,
 .gauge-fill {
   fill: none;
-  stroke-width: 11;
+  stroke-width: 10;
 }
 .gauge-bg {
   stroke: #e5e9f7;
 }
 .gauge-fill {
-  stroke: url(#scoreGradient);
+  stroke-linecap: round;
   transition: stroke-dashoffset 1.3s var(--spring);
 }
 .gauge-score {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
-  font: 750 2.15rem var(--font-head);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.gauge-number {
+  font: 750 2.6rem var(--font-head);
+  line-height: 1;
+  color: var(--text-1);
+}
+.gauge-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }

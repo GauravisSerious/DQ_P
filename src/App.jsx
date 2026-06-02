@@ -18,8 +18,8 @@ function App() {
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/auth" element={<AuthPage />} />
       </Route>
+      <Route path="/auth" element={<AuthPage />} />
 
       <Route
         path="/app"

@@ -7,6 +7,13 @@ import ScoreTable from "../../components/ScoreTable";
 import { useAudit } from "../../context/AuditContext";
 import { useAuditSummary } from "../../hooks/useAuditSummary";
 
+function getReadinessLabel(score) {
+  if (score >= 85) return { text: "Excellent", cls: "readiness-excellent" };
+  if (score >= 70) return { text: "Good", cls: "readiness-good" };
+  if (score >= 50) return { text: "Needs work", cls: "readiness-warn" };
+  return { text: "Critical", cls: "readiness-critical" };
+}
+
 function ResultsDashboardPage() {
   const { scores, findings, recommendations } = useAudit();
   const summary = useAuditSummary();
@@ -31,9 +38,18 @@ function ResultsDashboardPage() {
             </div>
           </section>
           <div className="metric-strip">
-            <article><strong>{summary.score}</strong><span>Confidence score</span></article>
-            <article><strong>{summary.findingsCount}</strong><span>Findings detected</span></article>
-            <article><strong>{summary.actionsCount}</strong><span>Recommended actions</span></article>
+            <article>
+              <strong>{summary.score}</strong>
+              <span>Confidence score</span>
+            </article>
+            <article>
+              <strong>{summary.findingsCount}</strong>
+              <span>Findings detected</span>
+            </article>
+            <article>
+              <strong>{summary.actionsCount}</strong>
+              <span>Recommended actions</span>
+            </article>
           </div>
         </Panel>
       </section>
@@ -45,7 +61,7 @@ function ResultsDashboardPage() {
         </Panel>
         <Panel className="results-column">
           <h3>🚀 What to do next</h3>
-          <div className="stack">{recommendations.map((item) => <FindingCard key={item} severity="blue" text={item} />)}</div>
+          <div className="stack">{recommendations.map((item, idx) => <FindingCard key={item} severity="blue" text={`${idx + 1}. ${item}`} />)}</div>
         </Panel>
       </section>
 
@@ -54,23 +70,27 @@ function ResultsDashboardPage() {
           <h3>📊 Detailed pillar scores</h3>
           <ScoreTable rows={scores.breakdown} />
           <div className="readiness-map">
-            <h3>AI readiness heat</h3>
-            {scores.breakdown.map((item) => (
-              <div className="readiness-row" key={item.pillar}>
-                <span>{item.pillar}</span>
-                <div className="readiness-bar">
-                  <div style={{ width: `${item.score}%` }} />
+            <h3>Readiness by category</h3>
+            {scores.breakdown.map((item) => {
+              const label = getReadinessLabel(item.score);
+              return (
+                <div className="readiness-row" key={item.pillar}>
+                  <span>{item.pillar}</span>
+                  <div className="readiness-bar">
+                    <div style={{ width: `${item.score}%` }} />
+                  </div>
+                  <strong>{item.score}</strong>
+                  <span className={`readiness-tag ${label.cls}`}>{label.text}</span>
                 </div>
-                <strong>{item.score}</strong>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </Panel>
         <Panel className="results-column">
           <h3>🧠 Executive summary</h3>
           <div className="state-card">
             <p>
-              Score {summary.score}. Your audit highlights {summary.findingsCount} key risks and {summary.actionsCount}
+              Score {summary.score}. Your audit highlights {summary.findingsCount} key risks and {summary.actionsCount}{" "}
               action items. This means your data setup is usable, but prioritizing these fixes will improve reporting trust and AI readiness.
             </p>
           </div>

@@ -1,11 +1,11 @@
 .finding-card {
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 14px;
+  padding: 16px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
   background: #fff;
-  transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t) var(--ease);
+  transition: transform 0.25s var(--spring), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
 }
 .finding-card:hover {
   transform: translateY(-2px);
@@ -33,14 +33,20 @@
   margin-top: 4px;
 }
 .finding-card.severity-red {
-  border-color: #f3c7c7;
+  border-color: var(--red-mid);
   background: linear-gradient(180deg, #fff 0%, var(--red-pale) 100%);
+  border-left: 3px solid var(--red);
 }
 .finding-card.severity-amber {
-  border-color: #f6ddb2;
+  border-color: var(--amber-mid);
   background: linear-gradient(180deg, #fff 0%, var(--amber-pale) 100%);
+  border-left: 3px solid var(--amber);
 }
 .finding-card.severity-green {
-  border-color: #c5efcc;
+  border-color: var(--green-mid);
   background: linear-gradient(180deg, #fff 0%, var(--green-pale) 100%);
+  border-left: 3px solid var(--green);
+}
+.finding-card.severity-blue {
+  border-left: 3px solid var(--blue);
 }

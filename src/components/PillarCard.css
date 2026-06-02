@@ -1,30 +1,66 @@
 .pillar-card {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 12px 14px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: linear-gradient(180deg, #fff 0%, #fcfdff 100%);
-  transition: all var(--t) var(--ease);
-}
-.pillar-card.running {
-  border-color: var(--blue);
-  background: linear-gradient(180deg, var(--blue-pale) 0%, #f4f7ff 100%);
-  box-shadow: 0 0 0 1px rgba(59, 91, 219, 0.15), 0 8px 20px rgba(59, 91, 219, 0.12);
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  transition: all 0.35s var(--spring);
+  animation: fadeRise 0.4s var(--spring) both;
 }
 .pillar-card.done {
-  border-color: var(--green);
-  background: linear-gradient(180deg, var(--green-pale) 0%, #f3fff6 100%);
-  box-shadow: 0 0 0 1px rgba(47, 158, 68, 0.15), 0 8px 20px rgba(47, 158, 68, 0.1);
+  border-color: var(--green-mid);
+  background: linear-gradient(180deg, #fff 0%, var(--green-pale) 100%);
+}
+.pillar-card.running {
+  border-color: var(--blue-mid);
+  background: linear-gradient(180deg, #fff 0%, var(--blue-pale) 100%);
+  box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.08);
+}
+.pillar-card.queued {
+  opacity: 0.55;
 }
 .pillar-icon {
-  width: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  background: var(--bg-deep);
+  color: var(--text-3);
+  transition: all 0.35s var(--spring);
+}
+.pillar-card.done .pillar-icon {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
 }
 .pillar-card.running .pillar-icon {
-  animation: pulseRing 1s infinite;
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  animation: pulseRing 1.2s ease infinite;
 }
-.blink {
-  margin-left: auto;
-  animation: blink 1s steps(2, start) infinite;
+.pillar-title {
+  font-weight: 600;
+  flex: 1;
+}
+.pillar-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: pulseRing 1s ease infinite;
+}
+.pillar-done-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }

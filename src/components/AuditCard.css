@@ -2,23 +2,28 @@
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 18px;
+  padding: 20px;
   display: flex;
   gap: 14px;
-  align-items: flex-start;
+  align-items: center;
   background: linear-gradient(180deg, #fff 0%, #fcfdff 100%);
   cursor: pointer;
-  transition: all var(--t) var(--ease);
+  transition: all 0.25s var(--spring);
   box-shadow: 0 2px 8px rgba(17, 24, 39, 0.04);
 }
 .audit-card p {
   margin-top: 5px;
   color: var(--text-2);
+  font-size: 0.9rem;
 }
 .audit-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: var(--blue-mid);
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 24px rgba(59, 91, 219, 0.1);
+}
+.audit-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
 }
 .audit-card.selected {
   border-color: var(--blue);
@@ -26,11 +31,35 @@
   box-shadow: 0 0 0 1px rgba(59, 91, 219, 0.2), 0 10px 28px rgba(59, 91, 219, 0.14);
 }
 .audit-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
   background: rgba(59, 91, 219, 0.08);
   flex-shrink: 0;
+  font-size: 1.15rem;
+}
+.audit-card.selected .audit-icon {
+  background: rgba(59, 91, 219, 0.14);
+}
+.audit-radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border-mid);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: border-color 0.25s var(--ease);
+}
+.audit-card.selected .audit-radio {
+  border-color: var(--blue);
+}
+.audit-radio-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: checkPop 0.3s var(--spring);
 }

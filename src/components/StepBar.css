@@ -1,12 +1,12 @@
 .stepbar {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   flex-wrap: wrap;
   margin-bottom: 26px;
 }
 .stepbar-item {
   flex: 1;
-  min-width: 95px;
+  min-width: 80px;
   display: grid;
   justify-items: center;
   gap: 6px;
@@ -18,45 +18,53 @@
   top: 15px;
   left: calc(50% + 20px);
   right: calc(-50% + 20px);
-  height: 2px;
-  background: linear-gradient(90deg, #dfe4f4, #dfe4f4);
+  height: 3px;
+  background: #dfe4f4;
   z-index: -1;
+  transition: background 0.5s var(--ease);
 }
 .stepbar-item.done:not(:last-child)::after {
-  background: linear-gradient(90deg, var(--green), var(--blue));
+  background: var(--green);
+}
+.stepbar-item.active:not(:last-child)::after {
+  background: linear-gradient(90deg, var(--blue), #dfe4f4);
 }
 .stepbar-dot {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  border: 1px solid #d8deef;
+  border: 2px solid #d8deef;
   color: #6b7899;
   background: #fff;
   font-size: 0.8rem;
   font-weight: 700;
-  transition: all var(--t) var(--ease);
+  transition: all 0.35s var(--spring);
 }
 .stepbar-dot.active {
   color: #fff;
   border-color: var(--blue);
   background: linear-gradient(135deg, var(--blue), var(--indigo));
   box-shadow: 0 0 0 5px rgba(59, 91, 219, 0.14);
+  transform: scale(1.1);
 }
 .stepbar-dot.done {
   color: #fff;
   border-color: var(--green);
   background: var(--green);
+  box-shadow: 0 0 0 3px rgba(30, 142, 62, 0.12);
 }
 .stepbar-item small {
   color: #8a94ac;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.65rem;
+  transition: color 0.3s var(--ease);
 }
 .stepbar-item.active small {
   color: var(--blue);
+  font-weight: 700;
 }
 .stepbar-item.done small {
   color: var(--green);
