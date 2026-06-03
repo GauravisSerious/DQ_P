@@ -1,7 +1,7 @@
 import { useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useAudit } from "../context/AuditContext";
-import DQPulseLogo from "../components/DQPulseLogo";
 
 export default function AuthPage() {
   const { signIn } = useAudit();
@@ -30,7 +30,8 @@ export default function AuthPage() {
       {/* ── TOP NAV BAR ─────────────────────────────────────────── */}
       <header className="auth-topnav">
         <Link to="/" className="auth-topnav-brand" aria-label="DQ Pulse home">
-          <DQPulseLogo size="small" />
+          <span className="auth-brand-icon" aria-hidden="true">⚡</span>
+          <span className="auth-brand-name">DQ PULSE</span>
         </Link>
         <span className="auth-topnav-tagline">Data Quality Intelligence Platform</span>
       </header>
