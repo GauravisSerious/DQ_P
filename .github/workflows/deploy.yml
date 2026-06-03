@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Upgraded core actions to natively support the Node.js 24 runner standard
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -17,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24' # Upgraded from Node 20 to future-proof your build
           cache: 'npm'
 
       - name: Install dependencies
@@ -26,8 +27,9 @@ jobs:
       - name: Build project
         run: npm run build
 
+      # Upgraded to v4 to remove Node 20 warning strings and support the modern artifact backend
       - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: dist
 
@@ -43,6 +45,7 @@ jobs:
       id-token: write
 
     steps:
+      # Upgraded to v4 to natively match the updated v4 upload-pages backend
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v4
