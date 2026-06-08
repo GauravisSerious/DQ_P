@@ -59,4 +59,32 @@ export const useCasesByAudit = {
       icon: "📡",
     },
   ],
+  governance: [
+    {
+      id: "gov-1",
+      title: "Automated Compliance Audit",
+      blurb: "Run periodic GDPR & CCPA assessments looking for plain-text PII parameters and consent signal mismatches.",
+      icon: "⚖️",
+    },
+    {
+      id: "gov-2",
+      title: "Data Stewardship Mapping",
+      blurb: "Automatically map and tag sensitive dataset columns to enforce column-level security policies.",
+      icon: "🛡️",
+    },
+  ],
+  marketing: [
+    {
+      id: "mkt-1",
+      title: "Cross-Channel ROI Alignment",
+      blurb: "Stitch multi-platform marketing cost logs using unified attribution parameters to verify ROI accuracy.",
+      icon: "🎨",
+    },
+    {
+      id: "mkt-2",
+      title: "ROAS Leakage Auditing",
+      blurb: "Detect conversion event double-fires in real time to prevent automated bidding algorithm skew.",
+      icon: "💸",
+    },
+  ],
 };

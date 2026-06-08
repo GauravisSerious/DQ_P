@@ -46,7 +46,7 @@ export default function AuthPage() {
             Connect once. Get severity-coded findings, confidence scores, and prioritised action plans — no SQL or manual scripts required.
           </p>
 
-          <ul className="auth-props-list">
+          <ul className="auth-props-list" style={{ marginBottom: "32px" }}>
             <li>
               <span className="auth-prop-icon auth-prop-green" aria-hidden="true">✓</span>
               <span>Read-only BigQuery scanning — zero data mutation</span>
@@ -65,20 +65,59 @@ export default function AuthPage() {
             </li>
           </ul>
 
-          <div className="auth-metric-strip">
-            <div className="auth-metric">
-              <strong className="lp-metric-val metric-green">78</strong>
-              <span>Avg. confidence score</span>
-            </div>
-            <div className="auth-metric-divider"/>
-            <div className="auth-metric">
-              <strong className="lp-metric-val metric-red">3</strong>
-              <span>Avg. critical findings</span>
-            </div>
-            <div className="auth-metric-divider"/>
-            <div className="auth-metric">
-              <strong className="lp-metric-val metric-blue">5</strong>
-              <span>Avg. action items</span>
+          <div className="trust-section" style={{ marginTop: "0" }}>
+            <h3>WHAT DQ PULSE EVALUATES</h3>
+            <p className="helper-copy" style={{ marginBottom: 16 }}>Our audit validates your analytics architecture across core reliability dimensions:</p>
+            <div className="trust-grid">
+              <div className="trust-card">
+                <span className="trust-icon">✓</span>
+                <div>
+                  <strong>Data Quality</strong>
+                  <p>Detect null fields, schema drift, and freshness issues.</p>
+                </div>
+              </div>
+              <div className="trust-card">
+                <span className="trust-icon">✓</span>
+                <div>
+                  <strong>Tracking Integrity</strong>
+                  <p>Validate event names, triggers, and parameter counts.</p>
+                </div>
+              </div>
+              <div className="trust-card">
+                <span className="trust-icon">✓</span>
+                <div>
+                  <strong>Attribution Readiness</strong>
+                  <p>Ensure click identifiers and source definitions align.</p>
+                </div>
+              </div>
+              <div className="trust-card">
+                <span className="trust-icon">✓</span>
+                <div>
+                  <strong>AI & ML Readiness</strong>
+                  <p>Check features availability and prediction label latency.</p>
+                </div>
+              </div>
+              <div className="trust-card">
+                <span className="trust-icon">✓</span>
+                <div>
+                  <strong>Governance & Compliance</strong>
+                  <p>Audit GDPR consent flags and detect plain-text PII.</p>
+                </div>
+              </div>
+              <div className="trust-card">
+                <span className="trust-icon">✓</span>
+                <div>
+                  <strong>Marketing Measurement Reliability</strong>
+                  <p>Ensure UTM query tags match ad configurations.</p>
+                </div>
+              </div>
+              <div className="trust-card">
+                <span className="trust-icon text-blue">✓</span>
+                <div>
+                  <strong>Actionable Recommendations</strong>
+                  <p>Get prioritized steps to remediate identified anomalies.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

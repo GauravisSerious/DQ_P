@@ -9,7 +9,9 @@ const initialState = {
   selectedAudit: "complete",
   userIdentity: "unknown",
   project: "demo-project",
-  dataset: "analytics_123",
+  dataset: "analytics_294819481",
+  table: "events_*",
+  selectedCustomCategories: new Set(),
   auditProgress: { step: 0, total: 0, status: "Queued checks" },
   running: false,
   loading: false,
@@ -27,7 +29,7 @@ function reducer(state, action) {
     case "SIGN_IN":
       return { ...state, user: action.payload };
     case "SIGN_OUT":
-      return { ...initialState, selectedGoals: new Set() };
+      return { ...initialState, selectedGoals: new Set(), selectedCustomCategories: new Set() };
     case "TOGGLE_GOAL": {
       const next = new Set(state.selectedGoals);
       if (next.has(action.payload)) next.delete(action.payload);
@@ -42,6 +44,14 @@ function reducer(state, action) {
       return { ...state, project: action.payload };
     case "SET_DATASET":
       return { ...state, dataset: action.payload };
+    case "SET_TABLE":
+      return { ...state, table: action.payload };
+    case "TOGGLE_CUSTOM_CATEGORY": {
+      const next = new Set(state.selectedCustomCategories);
+      if (next.has(action.payload)) next.delete(action.payload);
+      else next.add(action.payload);
+      return { ...state, selectedCustomCategories: next };
+    }
     case "SET_PROGRESS":
       return { ...state, auditProgress: action.payload };
     case "SET_RUNNING":
@@ -63,7 +73,13 @@ function reducer(state, action) {
     case "CLOSE_MODAL":
       return { ...state, showUseCaseModal: false, selectedUseCase: null };
     case "RESET":
-      return { ...initialState, user: state.user, selectedGoals: new Set(), selectedAudit: state.selectedAudit };
+      return {
+        ...initialState,
+        user: state.user,
+        selectedGoals: new Set(),
+        selectedCustomCategories: new Set(),
+        selectedAudit: state.selectedAudit
+      };
     default:
       return state;
   }
@@ -97,6 +113,8 @@ export function AuditProvider({ children }) {
         identity: state.userIdentity,
         project: state.project,
         dataset: state.dataset,
+        table: state.table,
+        customCategories: Array.from(state.selectedCustomCategories),
         onProgress: (progress) => dispatch({ type: "SET_PROGRESS", payload: progress }),
       });
       dispatch({ type: "SET_RESULTS", payload: result });
@@ -121,6 +139,8 @@ export function AuditProvider({ children }) {
       setIdentity: (identity) => dispatch({ type: "SET_IDENTITY", payload: identity }),
       setProject: (project) => dispatch({ type: "SET_PROJECT", payload: project }),
       setDataset: (dataset) => dispatch({ type: "SET_DATASET", payload: dataset }),
+      setTable: (table) => dispatch({ type: "SET_TABLE", payload: table }),
+      toggleCustomCategory: (category) => dispatch({ type: "TOGGLE_CUSTOM_CATEGORY", payload: category }),
       setProgress: (progress) => dispatch({ type: "SET_PROGRESS", payload: progress }),
       openUseCaseModal: (item) => dispatch({ type: "OPEN_MODAL", payload: item }),
       closeUseCaseModal: () => dispatch({ type: "CLOSE_MODAL" }),

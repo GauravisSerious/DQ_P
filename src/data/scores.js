@@ -36,4 +36,28 @@ export const scoreByAudit = {
       { pillar: "Conversion fidelity", score: 88 },
     ],
   },
+  governance: {
+    score: 71,
+    verdict: "Data governance and privacy setup has gaps that require attention",
+    tag: "Needs Work",
+    blurb: "While some consent structures exist, inconsistent policy enforcement and unclassified fields pose compliance risks.",
+    breakdown: [
+      { pillar: "Consent validation", score: 68 },
+      { pillar: "Retention policies", score: 75 },
+      { pillar: "Privacy controls", score: 64 },
+      { pillar: "Data classification", score: 77 },
+    ],
+  },
+  marketing: {
+    score: 83,
+    verdict: "Your marketing measurement tags and attribution are mostly reliable",
+    tag: "Good",
+    blurb: "UTM tracking and attribution fields are in place, but conversion duplicate firing and platform inconsistencies are leaking attribution credit.",
+    breakdown: [
+      { pillar: "UTM validation", score: 88 },
+      { pillar: "Attribution consistency", score: 80 },
+      { pillar: "Conversion tracking", score: 79 },
+      { pillar: "Platform parity", score: 85 },
+    ],
+  },
 };

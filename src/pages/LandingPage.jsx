@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 
-const METRICS_BQ = [
-  { value: "78", label: "Overall confidence score", colorClass: "metric-green" },
-  { value: "3",  label: "High-impact findings",     colorClass: "metric-red"   },
-  { value: "5",  label: "Prioritized actions",       colorClass: "metric-blue"  },
+const BQ_CAPABILITIES = [
+  "Data Quality Assessment",
+  "Tracking Integrity Validation",
+  "AI & ML Readiness Review",
+  "Governance & Compliance Checks",
+  "Actionable Recommendations",
 ];
-const METRICS_MSLD = [
-  { value: "12%", label: "Projected spend saved",   colorClass: "metric-green" },
-  { value: "4",   label: "Rogue campaigns found",   colorClass: "metric-red"   },
-  { value: "2",   label: "Duplicate conversions",   colorClass: "metric-amber" },
+
+const MSLD_CAPABILITIES = [
+  "Campaign Monitoring",
+  "Conversion Leakage Detection",
+  "Tracking Issue Identification",
+  "Attribution Validation",
+  "Marketing Performance Insights",
 ];
 
 const STEPS = [
@@ -57,27 +62,7 @@ const STEPS = [
   },
 ];
 
-function MiniGauge() {
-  const r = 28, c = 2 * Math.PI * r;
-  return (
-    <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true" className="lp-mini-gauge">
-      <circle cx="36" cy="36" r={r} fill="none" stroke="#e5e9f7" strokeWidth="5"/>
-      <circle cx="36" cy="36" r={r} fill="none"
-        stroke="url(#lpGrad)" strokeWidth="5"
-        strokeDasharray={c} strokeDashoffset={c * (1 - 0.78)}
-        strokeLinecap="round" transform="rotate(-90 36 36)"/>
-      <defs>
-        <linearGradient id="lpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#1a73e8"/>
-          <stop offset="100%" stopColor="#1e8e3e"/>
-        </linearGradient>
-      </defs>
-      <text x="36" y="41" textAnchor="middle" className="lp-gauge-num" fontSize="14" fontWeight="700" fill="#202124">78</text>
-    </svg>
-  );
-}
-
-function ProductCard({ id, title, desc, metrics, cta, to, accentClass, children }) {
+function ProductCard({ id, title, desc, capabilities, cta, to, accentClass }) {
   return (
     <article id={id} className={`lp-product-card ${accentClass}`}>
       <div className="lp-product-header">
@@ -85,16 +70,14 @@ function ProductCard({ id, title, desc, metrics, cta, to, accentClass, children 
         <p>{desc}</p>
       </div>
       <div className="lp-product-preview">
-        {children}
-        <div className="lp-metrics">
-          {metrics.map((m) => (
-            <div key={m.label} className="lp-metric-row">
-              <span className={`lp-metric-dot ${m.colorClass}`} aria-hidden="true"/>
-              <span className={`lp-metric-val ${m.colorClass}`}>{m.value}</span>
-              <span className="lp-metric-label">{m.label}</span>
-            </div>
+        <ul className="lp-capabilities">
+          {capabilities.map((cap) => (
+            <li key={cap} className="lp-capability-item">
+              <span className="lp-capability-check" aria-hidden="true">✓</span>
+              <span className="lp-capability-text">{cap}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
       <Link className="btn btn-primary lp-cta" to={to}>{cta}</Link>
     </article>
@@ -121,15 +104,10 @@ export default function LandingPage() {
           accentClass="lp-bq"
           title="BigQuery Data Audit"
           desc="Audit your BigQuery data quality with AI-ready guidance and actionable next steps."
-          metrics={METRICS_BQ}
+          capabilities={BQ_CAPABILITIES}
           cta="Start Audit"
           to="/auth"
-        >
-          <div className="lp-score-row">
-            <MiniGauge />
-            <span className="lp-score-label">Data Quality Score</span>
-          </div>
-        </ProductCard>
+        />
 
         <div className="lp-divider" aria-hidden="true"/>
 
@@ -138,26 +116,10 @@ export default function LandingPage() {
           accentClass="lp-msld"
           title="Media Spend Leak Detector"
           desc="Identify wasteful ad spend and optimize campaigns with automated tracking integrity checks."
-          metrics={METRICS_MSLD}
+          capabilities={MSLD_CAPABILITIES}
           cta="Start Monitoring"
           to="/auth"
-        >
-          <div className="lp-badge-row">
-            <span className="lp-savings-badge">12% Projected Savings</span>
-            <div className="lp-sparkline-wrap" aria-hidden="true">
-              <svg viewBox="0 0 200 48" preserveAspectRatio="none" className="lp-sparkline">
-                <polyline
-                  fill="none"
-                  stroke="#1e8e3e"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  points="0,42 25,35 50,38 75,26 100,28 125,16 150,12 175,15 200,6"
-                />
-              </svg>
-            </div>
-          </div>
-        </ProductCard>
+        />
       </section>
 
       {/* ── ONBOARDING STEPS ───────────────────────────────────── */}

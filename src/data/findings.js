@@ -16,6 +16,16 @@ export const findingsByAudit = {
     { severity: "blue", text: "Some legacy event names (v1 format) still fire alongside new names — creating duplicate counts." },
     { severity: "green", text: "Session and pageview setup is complete, with correct timeout and engagement settings." },
   ],
+  governance: [
+    { severity: "amber", text: "Consent parameters are missing on 12% of custom measurement hits, violating GDPR consent guidelines." },
+    { severity: "red", text: "Personally Identifiable Information (PII) detected in plain-text query parameters for email and signup events." },
+    { severity: "blue", text: "Data retention settings default to 'infinite' instead of the recommended 14-month compliance cycle." },
+  ],
+  marketing: [
+    { severity: "amber", text: "8.4% of incoming ad-campaign traffic has missing or malformed UTM parameters." },
+    { severity: "red", text: "Duplicate conversion event triggers fired on confirmation page, inflating Google Ads conversions." },
+    { severity: "blue", text: "Mobile app campaigns use a different UTM mapping than web campaigns, creating attribution gaps." },
+  ],
 };
 
 export const actionsByAudit = {
@@ -82,6 +92,46 @@ export const actionsByAudit = {
       title: "Create a weekly quality snapshot dashboard",
       description: "Build an automated weekly report that checks conversion event consistency, parameter fill rates, and session stitching accuracy. Flag any metric that drops below baseline.",
       impact: "Catches tracking regressions within 7 days instead of discovering them months later",
+      priority: "medium",
+    },
+  ],
+  governance: [
+    {
+      title: "Sanitize PII in URL parameters",
+      description: "Implement a Google Tag Manager redact rule or cloud proxy layer to strip email, name, and phone parameters from page URLs before they are stored in BigQuery.",
+      impact: "Guarantees zero plain-text PII storage, achieving strict CCPA/GDPR compliance",
+      priority: "high",
+    },
+    {
+      title: "Implement explicit consent gating",
+      description: "Configure your tag manager consent mode listeners to ensure no analytics hits fire before user consent is explicitly recorded.",
+      impact: "Eliminates unauthorized data collection, mitigating audit legal risks",
+      priority: "high",
+    },
+    {
+      title: "Configure data retention limits",
+      description: "Adjust raw event data retention in your analytics interface from infinite to the standard 14-month compliance cycle.",
+      impact: "Aligns storage policies with data minimization principles",
+      priority: "medium",
+    },
+  ],
+  marketing: [
+    {
+      title: "Fix duplicate conversion event triggers",
+      description: "De-duplicate conversion triggers on confirmation pages using transaction ID hashing or local storage fire-once flags.",
+      impact: "Restores CPA metrics accuracy, preventing ad spend attribution bloat",
+      priority: "high",
+    },
+    {
+      title: "Enforce unified UTM tags structure",
+      description: "Establish a strict lower-case UTM policy and configure URL normalizers to merge variant channel names (e.g. PPC, ppc, GoogleAds).",
+      impact: "Reduces 'Direct / None' misattribution in marketing report suites",
+      priority: "high",
+    },
+    {
+      title: "Align mobile app UTM parameter mapping",
+      description: "Ensure mobile SDK campaign capture maps to the same schema column fields as web tracking packages.",
+      impact: "Creates unified ROI reports across web and app platforms",
       priority: "medium",
     },
   ],
