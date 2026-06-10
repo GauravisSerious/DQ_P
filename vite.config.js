@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: '/web_v2/',
+  base: '/DQ_P/',
   build: {
     outDir: 'docs',
   },
