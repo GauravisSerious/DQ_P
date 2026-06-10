@@ -8,6 +8,7 @@ import ResultsDashboardPage from "./pages/app/ResultsDashboardPage";
 import RunningAuditPage from "./pages/app/RunningAuditPage";
 import SettingsPage from "./pages/app/SettingsPage";
 import WizardPage from "./pages/app/WizardPage";
+import MsldResultsPage from "./pages/app/MsldResultsPage";
 import NotFoundPage from "./pages/system/NotFoundPage";
 
 function App() {
@@ -27,6 +28,12 @@ function App() {
         <Route path="audit" element={<WizardPage />} />
         <Route path="running" element={<RunningAuditPage />} />
         <Route path="results" element={<ResultsDashboardPage />} />
+        
+        {/* MSLD Routes */}
+        <Route path="msld" element={<MsldResultsPage />} />
+        <Route path="msld/running" element={<Navigate to="/app/msld" replace />} />
+        <Route path="msld/results" element={<MsldResultsPage />} />
+        
         <Route path="settings" element={<SettingsPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />

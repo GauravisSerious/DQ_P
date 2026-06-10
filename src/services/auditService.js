@@ -8,7 +8,14 @@ const CUSTOM_MAP = {
   "Data Quality": {
     pillar: "Data quality validation",
     score: 79,
-    finding: { severity: "amber", text: "Null values found in 15% of critical customer attributes." },
+    finding: {
+      title: "Critical Customer Attribute Gaps",
+      severity: "amber",
+      text: "Null values found in 15% of critical customer attributes.",
+      observation: "Null values found in 15% of critical customer attributes.",
+      fix: "Enforce constraint check rules on customer schema to prevent NULL parameters.",
+      outcome: "Improves data pipeline coverage and segmentation accuracy."
+    },
     action: {
       title: "Cleanse critical customer attributes",
       description: "Enforce constraint check rules on customer schema to prevent NULL parameters.",
@@ -19,7 +26,14 @@ const CUSTOM_MAP = {
   "Tracking Integrity": {
     pillar: "Tracking integrity",
     score: 85,
-    finding: { severity: "red", text: "10% of transaction events lack purchase timestamps." },
+    finding: {
+      title: "Missing Transaction Timestamps",
+      severity: "red",
+      text: "10% of transaction events lack purchase timestamps.",
+      observation: "10% of transaction events lack purchase timestamps.",
+      fix: "Inject server-side transaction timestamps on client purchase triggers.",
+      outcome: "Fixes sequence parsing inconsistencies in funnel analytics."
+    },
     action: {
       title: "Add transaction event timestamps",
       description: "Inject server-side transaction timestamps on client purchase triggers.",
@@ -30,7 +44,14 @@ const CUSTOM_MAP = {
   "Attribution": {
     pillar: "Attribution quality",
     score: 72,
-    finding: { severity: "blue", text: "Some attribution models do not account for app installs." },
+    finding: {
+      title: "App Install Attribution Gaps",
+      severity: "blue",
+      text: "Some attribution models do not account for app installs.",
+      observation: "Some attribution models do not account for app installs.",
+      fix: "Map organic and paid install hooks to the centralized attribution engine.",
+      outcome: "Restores app-install ROI visibility."
+    },
     action: {
       title: "Align mobile install attribution modeling",
       description: "Map organic and paid install hooks to the centralized attribution engine.",
@@ -41,7 +62,14 @@ const CUSTOM_MAP = {
   "AI Readiness": {
     pillar: "AI & ML data readiness",
     score: 68,
-    finding: { severity: "amber", text: "Input features lack normalized scaling values." },
+    finding: {
+      title: "Feature Scaling Imbalances",
+      severity: "amber",
+      text: "Input features lack normalized scaling values.",
+      observation: "Input features lack normalized scaling values.",
+      fix: "Implement min-max scaling preprocessing steps inside features pipelines.",
+      outcome: "Improves ML model training convergence rates by 30%."
+    },
     action: {
       title: "Standardize scale scaling preprocessing",
       description: "Implement min-max scaling preprocessing steps inside features pipelines.",
@@ -52,7 +80,14 @@ const CUSTOM_MAP = {
   "Compliance": {
     pillar: "Compliance auditing",
     score: 74,
-    finding: { severity: "red", text: "Plain-text user emails leaked into custom link clicks." },
+    finding: {
+      title: "Plain-text PII Gaps",
+      severity: "red",
+      text: "Plain-text user emails leaked into custom link clicks.",
+      observation: "Plain-text user emails leaked into custom link clicks.",
+      fix: "Configure automated triggers to hash emails and names from URL logs.",
+      outcome: "Ensures compliance with basic data privacy legislation."
+    },
     action: {
       title: "Redact query params PII links",
       description: "Configure automated triggers to hash emails and names from URL logs.",
@@ -63,7 +98,14 @@ const CUSTOM_MAP = {
   "Governance": {
     pillar: "Data governance",
     score: 76,
-    finding: { severity: "blue", text: "Metadata descriptions are missing on 30% of tables." },
+    finding: {
+      title: "Missing Schema Metadata",
+      severity: "blue",
+      text: "Metadata descriptions are missing on 30% of tables.",
+      observation: "Metadata descriptions are missing on 30% of tables.",
+      fix: "Write descriptive schemas documentation using a structured data dictionary.",
+      outcome: "Enhances team discoverability and onboarding efficiency."
+    },
     action: {
       title: "Establish standard tables metadata registry",
       description: "Write descriptive schemas documentation using a structured data dictionary.",
@@ -74,7 +116,14 @@ const CUSTOM_MAP = {
   "Marketing Measurement": {
     pillar: "Marketing measurement validation",
     score: 82,
-    finding: { severity: "amber", text: "Google Ads gclid parameter missing from 5% of click records." },
+    finding: {
+      title: "Google Ads Auto-Tagging Gaps",
+      severity: "amber",
+      text: "Google Ads gclid parameter missing from 5% of click records.",
+      observation: "Google Ads gclid parameter missing from 5% of click records.",
+      fix: "Verify auto-tagging integration is active and matches page query parameter formats.",
+      outcome: "Restores click-to-lead matching precision."
+    },
     action: {
       title: "Sync Google Ads auto-tagging keys",
       description: "Verify auto-tagging integration is active and matches page query parameter formats.",

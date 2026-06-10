@@ -25,8 +25,8 @@ function FindingsPage() {
   return (
     <main className="workspace-page">
       <Panel>
-        <h2>Detailed findings</h2>
-        <p className="helper-copy">Plain-language issues detected during your scan.</p>
+        <h2>Key Findings</h2>
+        <p className="helper-copy">Strategic intelligence summaries mapped directly to corrective recommendations.</p>
 
         {findings.length > 0 && (
           <div className="findings-summary-bar">
@@ -52,7 +52,7 @@ function FindingsPage() {
         )}
 
         {!findings.length ? <EmptyState subtitle="No findings available yet. Run an audit first." /> : null}
-        <div className="stack">{filtered.map((item) => <FindingCard key={item.text} {...item} />)}</div>
+        <div className="stack">{filtered.map((item) => <FindingCard key={item.title || item.text} {...item} />)}</div>
       </Panel>
     </main>
   );

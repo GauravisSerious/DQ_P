@@ -106,7 +106,7 @@ export default function LandingPage() {
           desc="Audit your BigQuery data quality with AI-ready guidance and actionable next steps."
           capabilities={BQ_CAPABILITIES}
           cta="Start Audit"
-          to="/auth"
+          to="/auth?module=audit"
         />
 
         <div className="lp-divider" aria-hidden="true"/>
@@ -118,7 +118,7 @@ export default function LandingPage() {
           desc="Identify wasteful ad spend and optimize campaigns with automated tracking integrity checks."
           capabilities={MSLD_CAPABILITIES}
           cta="Start Monitoring"
-          to="/auth"
+          to="/auth?module=msld"
         />
       </section>
 

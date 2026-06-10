@@ -1,11 +1,11 @@
 import { useState } from "react";
-
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAudit } from "../context/AuditContext";
 
 export default function AuthPage() {
   const { signIn } = useAudit();
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState(null);
 
@@ -15,7 +15,14 @@ export default function AuthPage() {
     try {
       await new Promise((r) => setTimeout(r, 600));
       signIn("user@google.com");
-      navigate("/app/audit");
+
+      const searchParams = new URLSearchParams(location.search);
+      const moduleParam = searchParams.get("module");
+      if (moduleParam === "msld") {
+        navigate("/app/msld");
+      } else {
+        navigate("/app/audit");
+      }
     } catch {
       setError("Sign-in failed. Please check your connection and try again.");
       setLoading(false);

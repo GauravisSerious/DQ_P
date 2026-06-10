@@ -87,18 +87,31 @@ function ResultsDashboardPage() {
         </Panel>
       </section>
 
-      {/* ===== FINDINGS + NEXT STEPS (quick view) ===== */}
-      <section className="results-grid">
+      {/* ===== FINDINGS + NEXT STEPS (stacked vertically) ===== */}
+      <section className="results-inline-section" style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
         <Panel className="results-column">
-          <h3>🔍 What we found</h3>
-          <div className="stack">{findings.map((item) => <FindingCard key={item.text} {...item} />)}</div>
+          <h3>📊 Audit Insights</h3>
+          <div className="stack">{findings.map((item) => <FindingCard key={item.title || item.text} {...item} />)}</div>
         </Panel>
         <Panel className="results-column">
           <h3>🚀 What to do next</h3>
-          <div className="stack">
+          <div className="action-plan-list" style={{ margin: "10px 0 0" }}>
             {recommendations.map((item, idx) => {
-              const text = typeof item === "string" ? item : item.title;
-              return <FindingCard key={text} severity="blue" text={`${idx + 1}. ${text}`} />;
+              const isDetailed = typeof item === "object" && item.title;
+              const text = isDetailed ? item.title : item;
+              return (
+                <div key={text} className="action-plan-item" style={{ padding: "12px 14px" }}>
+                  <span className="action-plan-number" style={{ width: 24, height: 24, fontSize: "0.78rem" }}>{idx + 1}</span>
+                  <div className="action-plan-content">
+                    <p style={{ fontSize: "0.92rem", fontWeight: 500, color: "var(--text-1)", margin: 0 }}>{text}</p>
+                    {isDetailed && item.description && (
+                      <p style={{ fontSize: "0.84rem", color: "var(--text-2)", marginTop: 4, margin: "4px 0 0" }}>
+                        {item.description.length > 90 ? `${item.description.substring(0, 90)}...` : item.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
             })}
           </div>
         </Panel>
@@ -131,8 +144,8 @@ function ResultsDashboardPage() {
       {/* ===== INLINE FINDINGS SECTION ===== */}
       <section className="results-inline-section">
         <Panel>
-          <h2>Detailed findings</h2>
-          <p className="helper-copy">Plain-language issues detected during your scan.</p>
+          <h2>Key Findings</h2>
+          <p className="helper-copy">Strategic intelligence summaries mapped directly to corrective recommendations.</p>
 
           {findings.length > 0 && (
             <div className="findings-summary-bar">
@@ -158,7 +171,7 @@ function ResultsDashboardPage() {
           )}
 
           {!findings.length ? <EmptyState subtitle="No findings available yet. Run an audit first." /> : null}
-          <div className="stack">{filtered.map((item) => <FindingCard key={item.text} {...item} />)}</div>
+          <div className="stack">{filtered.map((item) => <FindingCard key={item.title || item.text} {...item} />)}</div>
         </Panel>
       </section>
 
